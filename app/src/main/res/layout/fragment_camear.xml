@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/topLayout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:keepScreenOn="true">
+
+
+    <SurfaceView
+        android:id="@+id/surfaceview1"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
+
+    <com.example.mac.opencvcard.activity.ui.FaceView
+        android:id="@+id/faceView"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        />
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/recycler_view"
+        android:layout_width="@dimen/image_preview"
+        android:layout_height="match_parent"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true"
+        android:layout_margin="10dp"
+        android:scrollbars="vertical"
+        />
+
+    <Button
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:id="@+id/camerapz"/>
+    <com.tuyenmonkey.mkloader.MKLoader
+        android:id="@+id/perss"
+        android:layout_width="150dp"
+        android:layout_height="120dp"
+        app:mk_type="FivePulse"
+        app:mk_color="#00aaaa"
+        android:layout_centerVertical="true"
+        android:layout_centerHorizontal="true"
+        android:visibility="invisible"/>
+<Button
+    android:layout_width="50dp"
+    android:layout_height="wrap_content"
+    android:text="反转"
+    android:layout_alignTop="@+id/buttonxc"
+    android:layout_toStartOf="@+id/buttonxc"
+    android:id="@+id/backCamera"/>
+    <Button
+        android:layout_width="50dp"
+        android:layout_height="wrap_content"
+        android:text="相册"
+        android:layout_alignTop="@+id/recycler_view"
+        android:layout_toStartOf="@+id/camerapz"
+        android:id="@+id/buttonxc"
+       />
+
+</RelativeLayout>

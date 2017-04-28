@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:fitsSystemWindows="true"
+    android:background="#acd8d6">
+    <RelativeLayout
+        android:id="@+id/login_layout"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:gravity="center"
+        android:layout_alignParentTop="true"
+        android:layout_marginTop="20dp">
+
+        <FrameLayout
+            android:id="@+id/username_layout"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="6dp"
+            android:gravity="center" >
+            <EditText
+                android:id="@+id/usercoll"
+                android:layout_width="fill_parent"
+                android:layout_height="40dp"
+                android:layout_marginTop="5dp"
+                android:hint="所在学院"
+                android:paddingRight="60dp"
+                android:maxLength="20"
+                android:paddingLeft="55dp"
+                android:background="#ffffff">
+            </EditText>
+            <ImageView
+                android:layout_width="24dp"
+                android:layout_height="22dp"
+                android:layout_marginStart="8dp"
+                android:layout_gravity="left|center_vertical"
+                android:background="@drawable/user_log"
+                android:visibility="visible" />
+
+
+            />
+        </FrameLayout>
+
+        <FrameLayout
+            android:id="@+id/usercode_layout"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="6dp"
+            android:gravity="center"
+            android:layout_below="@id/username_layout">
+            <EditText
+                android:id="@+id/numPhone"
+                android:layout_width="fill_parent"
+                android:layout_height="40dp"
+
+                android:paddingRight="60dp"
+                android:maxLength="20"
+                android:hint="个人学号"
+                android:paddingLeft="55dp"
+                android:background="#ffffff">
+            </EditText>
+            <ImageView
+                android:layout_width="24dp"
+                android:layout_height="22dp"
+                android:layout_marginStart="7dp"
+                android:layout_gravity="left|center_vertical"
+                android:background="@drawable/user_code"
+                />
+        </FrameLayout>
+
+        <Button
+            android:layout_marginTop="16dp"
+            android:layout_width="fill_parent"
+            android:layout_height="40dp"
+            android:background="#0000ee"
+            android:text="下一步"
+            android:onClick="exit_b"
+            android:layout_below="@id/usercode_layout" />
+
+    </RelativeLayout>
+</RelativeLayout>

@@ -1,0 +1,337 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v4.widget.NestedScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    app:layout_behavior="@string/appbar_scrolling_view_behavior"
+    tools:showIn="@layout/activity_user_data2" android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.example.mac.opencvcard.activity.UserData">
+
+<RelativeLayout
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content">
+    <FrameLayout
+        android:id="@+id/username_layout"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="25dp"
+        android:gravity="center" >
+        <TextView
+            android:id="@+id/username"
+            android:layout_width="fill_parent"
+            android:layout_height="40dp"
+            android:layout_marginTop="5dp"
+            android:gravity="center|right"
+            android:text="王志豪"
+            android:paddingRight="60dp"
+            android:maxLength="20"
+            android:paddingLeft="95dp"
+            android:background="#ffffff">
+        </TextView>
+        <ImageView
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:layout_marginStart="27dp"
+            android:layout_gravity="left|center_vertical"
+            android:background="@drawable/user_log"
+            android:visibility="visible" />
+        <ImageView
+            android:layout_width="20dp"
+            android:layout_height="40dp"
+            android:layout_marginRight="20dp"
+            android:layout_gravity="right|center_vertical"
+            android:background="@drawable/linkrad"
+            android:visibility="visible" />
+    </FrameLayout>
+    <FrameLayout
+    android:id="@+id/userage_layout"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+    android:layout_below="@id/username_layout"
+    android:gravity="center" >
+    <TextView
+        android:id="@+id/agesex"
+        android:layout_width="fill_parent"
+        android:layout_height="40dp"
+        android:paddingRight="60dp"
+        android:maxLength="20"
+        android:text="男 22岁"
+        android:paddingLeft="95dp"
+        android:gravity="center|right"
+        android:background="#ffffff">
+    </TextView>
+    <ImageView
+        android:layout_width="24dp"
+        android:layout_height="24dp"
+        android:layout_marginStart="27dp"
+        android:layout_gravity="left|center_vertical"
+        android:background="@drawable/userage"
+        />
+        <ImageView
+            android:layout_width="20dp"
+            android:layout_height="40dp"
+            android:layout_marginRight="20dp"
+            android:layout_gravity="right|center_vertical"
+            android:background="@drawable/linkblue"
+            android:visibility="visible" />
+</FrameLayout>
+    <FrameLayout
+        android:id="@+id/usersch_layout"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/userage_layout"
+        android:gravity="center" >
+        <TextView
+            android:id="@+id/school"
+            android:layout_width="fill_parent"
+            android:layout_height="40dp"
+            android:paddingRight="60dp"
+            android:maxLength="20"
+            android:text="西北农林科技大学"
+            android:gravity="center|right"
+            android:paddingLeft="95dp"
+            android:background="#ffffff">
+        </TextView>
+        <ImageView
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:layout_marginStart="27dp"
+            android:layout_gravity="left|center_vertical"
+            android:background="@drawable/usersch"
+            />
+        <ImageView
+            android:layout_width="20dp"
+            android:layout_height="40dp"
+            android:layout_marginRight="20dp"
+            android:layout_gravity="right|center_vertical"
+            android:background="@drawable/linkrad"
+            android:visibility="visible" />
+    </FrameLayout>
+    <FrameLayout
+        android:id="@+id/usercol_layout"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/usersch_layout"
+        android:gravity="center" >
+        <TextView
+            android:id="@+id/collage"
+            android:layout_width="fill_parent"
+            android:layout_height="40dp"
+            android:paddingRight="60dp"
+            android:maxLength="20"
+            android:text="信息工程学院"
+            android:gravity="center|right"
+            android:paddingLeft="95dp"
+            android:background="#ffffff">
+        </TextView>
+        <ImageView
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:layout_marginStart="27dp"
+            android:layout_gravity="left|center_vertical"
+            android:background="@drawable/usercol"
+            />
+        <ImageView
+            android:layout_width="20dp"
+            android:layout_height="40dp"
+            android:layout_marginRight="20dp"
+            android:layout_gravity="right|center_vertical"
+            android:background="@drawable/linkblue"
+            android:visibility="visible" />
+    </FrameLayout>
+    <FrameLayout
+        android:id="@+id/usergrade_layout"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/usercol_layout"
+        android:gravity="center" >
+        <TextView
+            android:id="@+id/grade"
+            android:layout_width="fill_parent"
+            android:layout_height="40dp"
+            android:paddingRight="60dp"
+            android:maxLength="20"
+            android:text="本科 14级"
+            android:gravity="center|right"
+            android:paddingLeft="95dp"
+            android:background="#ffffff">
+        </TextView>
+        <ImageView
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:layout_marginStart="27dp"
+            android:layout_gravity="left|center_vertical"
+            android:background="@drawable/usergrade"
+            />
+        <ImageView
+            android:layout_width="20dp"
+            android:layout_height="40dp"
+            android:layout_marginRight="20dp"
+            android:layout_gravity="right|center_vertical"
+            android:background="@drawable/linkrad"
+            android:visibility="visible" />
+    </FrameLayout>
+    <FrameLayout
+        android:id="@+id/userhome_layout"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/usergrade_layout"
+        android:gravity="center" >
+        <TextView
+            android:id="@+id/home"
+            android:layout_width="fill_parent"
+            android:layout_height="40dp"
+            android:paddingRight="60dp"
+            android:maxLength="20"
+            android:text="四川 德阳"
+            android:gravity="center|right"
+            android:paddingLeft="95dp"
+            android:background="#ffffff">
+        </TextView>
+        <ImageView
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:layout_marginStart="27dp"
+            android:layout_gravity="left|center_vertical"
+            android:background="@drawable/userhome"
+            />
+        <ImageView
+            android:layout_width="20dp"
+            android:layout_height="40dp"
+            android:layout_marginRight="20dp"
+            android:layout_gravity="right|center_vertical"
+            android:background="@drawable/linkblue"
+            android:visibility="visible" />
+    </FrameLayout>
+    <FrameLayout
+        android:id="@+id/usernum_layout"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/userhome_layout"
+        android:gravity="center" >
+        <TextView
+            android:id="@+id/num"
+            android:layout_width="fill_parent"
+            android:layout_height="40dp"
+            android:paddingRight="60dp"
+            android:maxLength="20"
+            android:text="2014012569"
+            android:gravity="center|right"
+            android:paddingLeft="95dp"
+            android:background="#ffffff">
+        </TextView>
+        <ImageView
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:layout_marginStart="27dp"
+            android:layout_gravity="left|center_vertical"
+            android:background="@drawable/usernum"
+            />
+        <ImageView
+            android:layout_width="20dp"
+            android:layout_height="40dp"
+            android:layout_marginRight="20dp"
+            android:layout_gravity="right|center_vertical"
+            android:background="@drawable/linkrad"
+            android:visibility="visible" />
+    </FrameLayout>
+    <FrameLayout
+        android:id="@+id/userphone_layout"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/usernum_layout"
+        android:gravity="center" >
+        <TextView
+            android:id="@+id/phonenum"
+            android:layout_width="fill_parent"
+            android:layout_height="40dp"
+            android:paddingRight="60dp"
+            android:maxLength="20"
+            android:text="18392463566"
+            android:gravity="center|right"
+            android:paddingLeft="95dp"
+            android:background="#ffffff">
+        </TextView>
+        <ImageView
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:layout_marginStart="27dp"
+            android:layout_gravity="left|center_vertical"
+            android:background="@drawable/userphone"
+            />
+        <ImageView
+            android:layout_width="20dp"
+            android:layout_height="40dp"
+            android:layout_marginRight="20dp"
+            android:layout_gravity="right|center_vertical"
+            android:background="@drawable/linkblue"
+            android:visibility="visible" />
+    </FrameLayout>
+    <FrameLayout
+        android:id="@+id/userqq_layout"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/userphone_layout"
+        android:gravity="center" >
+        <TextView
+            android:id="@+id/qqnum"
+            android:layout_width="fill_parent"
+            android:layout_height="40dp"
+            android:paddingRight="60dp"
+            android:maxLength="20"
+            android:text="344738817"
+            android:gravity="center|right"
+            android:paddingLeft="95dp"
+            android:background="#ffffff">
+        </TextView>
+        <ImageView
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:layout_marginStart="27dp"
+            android:layout_gravity="left|center_vertical"
+            android:background="@drawable/userqq"
+            />
+        <ImageView
+            android:layout_width="20dp"
+            android:layout_height="40dp"
+            android:layout_marginRight="20dp"
+            android:layout_gravity="right|center_vertical"
+            android:background="@drawable/linkrad"
+            android:visibility="visible" />
+    </FrameLayout>
+    <FrameLayout
+        android:id="@+id/userlike_layout"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/userqq_layout"
+        android:gravity="center" >
+        <TextView
+            android:id="@+id/likething"
+            android:layout_width="fill_parent"
+            android:layout_height="40dp"
+            android:paddingRight="60dp"
+            android:maxLength="20"
+            android:text="足球 篮球 历史"
+            android:gravity="center|right"
+            android:paddingLeft="95dp"
+            android:background="#ffffff">
+        </TextView>
+        <ImageView
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:layout_marginStart="27dp"
+            android:layout_gravity="left|center_vertical"
+            android:background="@drawable/userlike"
+            />
+        <ImageView
+            android:layout_width="20dp"
+            android:layout_height="40dp"
+            android:layout_marginRight="20dp"
+            android:layout_gravity="right|center_vertical"
+            android:background="@drawable/linkblue"
+            android:visibility="visible" />
+    </FrameLayout>
+</RelativeLayout>
+
+</android.support.v4.widget.NestedScrollView>
