@@ -39,6 +39,9 @@ dependencies {
     compile 'com.github.yalantis:searchfilter:v1.0.0'
     compile 'com.github.florent37:camerafragment:1.0.1'
     compile 'com.tuyenmonkey:mkloader:1.0.0'
+    compile files('libs/volley.jar')
+    compile files('libs/gson-2.0.jar')
+    compile files('libs/android-support-v4.jar')
 }
 
 

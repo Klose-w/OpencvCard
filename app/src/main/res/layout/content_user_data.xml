@@ -23,7 +23,7 @@
             android:layout_height="40dp"
             android:layout_marginTop="5dp"
             android:gravity="center|right"
-            android:text="王志豪"
+            android:text="@string/pname"
             android:paddingRight="60dp"
             android:maxLength="20"
             android:paddingLeft="95dp"
@@ -56,7 +56,7 @@
         android:layout_height="40dp"
         android:paddingRight="60dp"
         android:maxLength="20"
-        android:text="男 22岁"
+        android:text="@string/psexage"
         android:paddingLeft="95dp"
         android:gravity="center|right"
         android:background="#ffffff">
@@ -88,7 +88,7 @@
             android:layout_height="40dp"
             android:paddingRight="60dp"
             android:maxLength="20"
-            android:text="西北农林科技大学"
+            android:text="@string/pschool"
             android:gravity="center|right"
             android:paddingLeft="95dp"
             android:background="#ffffff">
@@ -120,7 +120,7 @@
             android:layout_height="40dp"
             android:paddingRight="60dp"
             android:maxLength="20"
-            android:text="信息工程学院"
+            android:text="@string/pcollage"
             android:gravity="center|right"
             android:paddingLeft="95dp"
             android:background="#ffffff">
@@ -152,7 +152,7 @@
             android:layout_height="40dp"
             android:paddingRight="60dp"
             android:maxLength="20"
-            android:text="本科 14级"
+            android:text="@string/pxueligrade"
             android:gravity="center|right"
             android:paddingLeft="95dp"
             android:background="#ffffff">
@@ -184,7 +184,7 @@
             android:layout_height="40dp"
             android:paddingRight="60dp"
             android:maxLength="20"
-            android:text="四川 德阳"
+            android:text="@string/phome"
             android:gravity="center|right"
             android:paddingLeft="95dp"
             android:background="#ffffff">
@@ -216,7 +216,7 @@
             android:layout_height="40dp"
             android:paddingRight="60dp"
             android:maxLength="20"
-            android:text="2014012569"
+            android:text="@string/pnumber"
             android:gravity="center|right"
             android:paddingLeft="95dp"
             android:background="#ffffff">
@@ -248,7 +248,7 @@
             android:layout_height="40dp"
             android:paddingRight="60dp"
             android:maxLength="20"
-            android:text="18392463566"
+            android:text="@string/pphonenum"
             android:gravity="center|right"
             android:paddingLeft="95dp"
             android:background="#ffffff">
@@ -280,7 +280,7 @@
             android:layout_height="40dp"
             android:paddingRight="60dp"
             android:maxLength="20"
-            android:text="344738817"
+            android:text="@string/pqq"
             android:gravity="center|right"
             android:paddingLeft="95dp"
             android:background="#ffffff">
@@ -312,7 +312,7 @@
             android:layout_height="40dp"
             android:paddingRight="60dp"
             android:maxLength="20"
-            android:text="足球 篮球 历史"
+            android:text="@string/plike"
             android:gravity="center|right"
             android:paddingLeft="95dp"
             android:background="#ffffff">

@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="pname">西农</string>
+    <string name="psexage">男 18岁</string>
+    <string name="page"></string>
+    <string name="pschool">西北农林科技大学</string>
+    <string name="pcollage">信息工程学院</string>
+    <string name="pxueligrade"></string>
+    <string name="pgrade"></string>
+    <string name="pprovice"></string>
+    <string name="phome"></string>
+    <string name="pnumber">2014012569</string>
+    <string name="pphonenum">18392463566</string>
+    <string name="pqq">尚未填写</string>
+    <string name="plike">尚未填写</string>
+    <string name="plogin">否</string>
+</resources>

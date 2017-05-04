@@ -1,6 +1,7 @@
 package com.example.mac.opencvcard.activity;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.BitmapFactory;
 import android.graphics.Color;
 import android.graphics.Matrix;
@@ -41,6 +42,7 @@ import com.example.mac.opencvcard.Fragment.CamearFragment;
 import com.example.mac.opencvcard.Fragment.FaceTopTen;
 import com.example.mac.opencvcard.Fragment.StudentRecommend;
 import com.example.mac.opencvcard.Fragment.Studenttalk;
+import com.example.mac.opencvcard.MainActivity;
 import com.example.mac.opencvcard.R;
 import com.example.mac.opencvcard.adapter.MyFragmentAdapter;
 import com.example.mac.opencvcard.model.spacetablayout.SpaceTabLayout;
@@ -54,7 +56,7 @@ public class Main2Activity extends AppCompatActivity implements NavigationView.O
 
         private long exitTime = 0;
         private MyFragmentAdapter mAdapter;
-
+        SharedPreferences sp;
         //鍑犱釜浠ｈ〃椤甸潰鐨勫父閲?
         public static final int PAGE_ONE = 0;
         public static final int PAGE_TWO = 1;
@@ -129,12 +131,19 @@ public class Main2Activity extends AppCompatActivity implements NavigationView.O
         } else if (id == R.id.nav_slideshow) {
 
         } else if (id == R.id.nav_manage) {
+            Intent intent = new Intent(Main2Activity.this, UserData.class);
+            startActivity(intent);
 
         } else if (id == R.id.nav_share) {
 
         } else if (id == R.id.nav_send) {
-            Intent intent = new Intent(Main2Activity.this, UserData.class);
+            sp=getSharedPreferences("person",MODE_WORLD_READABLE);
+            SharedPreferences.Editor ed =sp.edit();
+            ed.putString("plogin","否");
+            ed.commit();
+            Intent intent = new Intent(Main2Activity.this, MainActivity.class);
             startActivity(intent);
+            finish();
         }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);

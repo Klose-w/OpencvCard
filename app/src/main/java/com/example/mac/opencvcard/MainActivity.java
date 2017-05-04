@@ -2,6 +2,7 @@ package com.example.mac.opencvcard;
 
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.os.Bundle;
 
@@ -11,18 +12,33 @@ import android.support.v7.app.AppCompatActivity;
 import android.text.Editable;
 import android.text.InputType;
 import android.text.TextWatcher;
+import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.android.volley.AuthFailureError;
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.JsonObjectRequest;
+import com.android.volley.toolbox.JsonRequest;
+import com.android.volley.toolbox.Volley;
 import com.example.mac.opencvcard.activity.HttpThread;
 import com.example.mac.opencvcard.activity.LastRigster;
 import com.example.mac.opencvcard.activity.Main2Activity;
 import com.example.mac.opencvcard.activity.UserData;
+import com.google.gson.JsonObject;
+
+
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.util.HashMap;
+import java.util.Map;
 
 
 /**
@@ -31,19 +47,76 @@ import java.util.HashMap;
 
 public class MainActivity extends AppCompatActivity {
 
-
+    SharedPreferences sp;
+    SharedPreferences.Editor ed;
     EditText et_name, et_pass;
     private Button LoginButton, mRegister, forgetpass;
     private Button bt_username_clear;
     private Button bt_pwd_clear;
     private Button bt_pwd_eye;
+    String perphonenum;
+    String pername;
+    String persexgrade;
+    String perschool;
+    String percollege;
+    String perxueli;
+    String perprovince;
+    String percity;
+    String pernum;
+    String perqq;
+    RequestQueue mQueue;
     private Handler handle = new Handler(){
         @Override
         public void handleMessage(Message msg) {
             super.handleMessage(msg);
             Bundle bundle = msg.getData();
             String state =(String) bundle.get("state");
-            if(state.equals("登陆成功")) {
+            if(state.equals("success")) {
+                Map<String, String> map = new HashMap<String, String>();
+                map.put("phonenum", et_name.getText().toString());
+                JSONObject jsonObject=new JSONObject(map);
+                JsonObjectRequest jsonObjectRequest=new JsonObjectRequest(Request.Method.POST,"http://115.159.188.113/CaoCao/finduser.php",jsonObject,new Response.Listener<JSONObject>(){
+                    @Override
+                    public void onResponse(JSONObject jsonObject) {
+                        Log.e("hhhh", jsonObject.toString());
+                        try {
+                            JSONObject jsonObject2 =new JSONObject(jsonObject.toString());
+                            perphonenum=jsonObject2.getString("phonenum");
+                            pername=jsonObject2.getString("name");
+                            persexgrade=jsonObject2.getString("gender")+jsonObject2.get("dob");
+                            perschool=jsonObject2.getString("school");
+                            percollege=jsonObject2.getString("college");
+                            perxueli=jsonObject2.getString("degree");
+                            perprovince=jsonObject2.getString("province");
+                            percity=jsonObject2.getString("city");
+                            pernum=jsonObject2.getString("sid");
+                            perqq=jsonObject2.getString("qq");
+                            ed.putString("pname",pername);
+                            ed.putString("psexage",persexgrade);
+                            ed.putString("pschool",perschool);
+                            ed.putString("pcollage",percollege);
+                            ed.putString("pxueligrade",perxueli);
+                            ed.putString("pprovice",perprovince);
+                            ed.putString("pnumber",pernum);
+                            ed.putString("pphonenum",perphonenum);
+                            ed.putString("pqq",perqq);
+                            ed.putString("plogin","是");
+                            ed.commit();
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+
+                    }
+                },new Response.ErrorListener(){
+
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        Log.e("TAG", error.getMessage(), error);
+                    }
+                }){
+
+                };
+                mQueue.add(jsonObjectRequest);
                 Intent intent=new Intent(MainActivity.this, Main2Activity.class);
                 startActivity(intent);
                 finish();
@@ -56,6 +129,7 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        mQueue = Volley.newRequestQueue(getApplicationContext());
         et_name = (EditText) findViewById(R.id.username);
         et_pass = (EditText) findViewById(R.id.password);
         bt_username_clear = (Button) findViewById(R.id.bt_username_clear);
@@ -64,6 +138,13 @@ public class MainActivity extends AppCompatActivity {
         LoginButton = (Button) findViewById(R.id.login);
         mRegister = (Button) findViewById(R.id.register);
         forgetpass = (Button) findViewById(R.id.login_error);
+        sp=getSharedPreferences("person",MODE_WORLD_READABLE);
+        ed=sp.edit();
+        if(sp.getString("plogin","").equals("是")) {
+            Intent intent=new Intent(MainActivity.this, Main2Activity.class);
+            startActivity(intent);
+            finish();
+        }
         mRegister.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
