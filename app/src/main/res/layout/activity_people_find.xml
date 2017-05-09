@@ -1,0 +1,214 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:fitsSystemWindows="true"
+    android:background="#acd8d6">
+    <LinearLayout
+        android:id="@+id/layout01"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="10dip"
+        android:layout_marginRight="10dip"
+        android:layout_marginTop="60dip"
+        android:background="#ffffff"
+        android:orientation="vertical" >
+        <RelativeLayout
+
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+
+            >
+
+            <TextView
+                android:id="@+id/fp_name"
+                android:layout_width="fill_parent"
+                android:layout_height="45dip"
+                android:background="#ffffff"
+                android:clickable="true"
+                android:gravity="center_vertical|right"
+                android:paddingRight="10dip"
+                android:singleLine="true"
+                android:textColor="@color/gray"
+                android:textSize="18sp" />
+            <TextView
+
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:hint="姓名"
+                android:paddingBottom="8dip"
+                android:paddingLeft="5dip"
+                android:paddingTop="10dip"
+                android:textColor="@color/gray"
+                android:textSize="18sp" />
+        </RelativeLayout>
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="2dip"
+            android:background="#acd8d6"
+            android:focusable="true"
+            android:focusableInTouchMode="true" />
+        <RelativeLayout
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical" >
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:hint="年龄"
+                android:paddingBottom="8dip"
+                android:paddingLeft="5dip"
+                android:paddingTop="10dip"
+                android:textColor="@color/gray"
+                android:textSize="18sp" />
+
+            <TextView
+                android:id="@+id/fp_age"
+                android:layout_width="fill_parent"
+                android:layout_height="45dip"
+
+                android:clickable="true"
+                android:gravity="center_vertical|right"
+                android:paddingRight="10dip"
+                android:singleLine="true"
+                android:textColor="@color/gray"
+                android:textSize="18sp" />
+        </RelativeLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="2dip"
+            android:background="#acd8d6"
+            android:focusable="true"
+            android:focusableInTouchMode="true" />
+
+        <RelativeLayout
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical" >
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:hint="年级"
+                android:paddingBottom="8dip"
+                android:paddingLeft="5dip"
+                android:paddingTop="10dip"
+                android:textColor="@color/gray"
+                android:textSize="18sp" />
+
+            <TextView
+                android:id="@+id/fp_grade"
+                android:layout_width="fill_parent"
+                android:layout_height="45dip"
+
+                android:clickable="true"
+                android:gravity="center_vertical|right"
+                android:paddingRight="10dip"
+                android:singleLine="true"
+                android:textColor="@color/gray"
+                android:textSize="18sp" />
+        </RelativeLayout>
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="2dip"
+            android:background="#acd8d6"
+            android:focusable="true"
+            android:focusableInTouchMode="true" />
+
+        <RelativeLayout
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical" >
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:hint="学院"
+                android:paddingBottom="8dip"
+                android:paddingLeft="5dip"
+                android:paddingTop="10dip"
+                android:textColor="@color/gray"
+                android:textSize="18sp" />
+
+            <TextView
+                android:id="@+id/fp_col"
+                android:layout_width="fill_parent"
+                android:layout_height="45dip"
+
+                android:clickable="true"
+                android:gravity="center_vertical|right"
+                android:paddingRight="10dip"
+                android:singleLine="true"
+                android:textColor="@color/gray"
+                android:textSize="18sp" />
+        </RelativeLayout>
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="2dip"
+            android:background="#acd8d6"
+            android:focusable="true"
+            android:focusableInTouchMode="true" />
+
+        <RelativeLayout
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical" >
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:hint="QQ"
+                android:paddingBottom="8dip"
+                android:paddingLeft="5dip"
+                android:paddingTop="10dip"
+                android:textColor="@color/gray"
+                android:textSize="18sp" />
+
+            <TextView
+                android:id="@+id/fp_qq"
+                android:layout_width="fill_parent"
+                android:layout_height="45dip"
+
+                android:clickable="true"
+                android:gravity="center_vertical|right"
+                android:paddingRight="10dip"
+                android:singleLine="true"
+                android:textColor="@color/gray"
+                android:textSize="18sp" />
+        </RelativeLayout>
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:gravity="bottom"
+        android:orientation="horizontal"
+        android:layout_alignParentBottom="true"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:layout_marginBottom="10dp"
+        >
+    <Button
+        android:layout_weight="1"
+        android:layout_width="1dp"
+        android:layout_height="60dp"
+        android:background="#ff7700"
+        android:text="收藏"
+        android:textSize="24sp"/>
+        <View
+
+            android:layout_width="10dp"
+            android:layout_height="70dp"/>
+    <Button
+        android:layout_weight="1"
+        android:layout_width="1dp"
+        android:layout_height="60dp"
+        android:background="#00bb00"
+        android:text="知了"
+        android:textSize="24sp"
+        android:onClick="zhiliao_bt"
+        />
+    </LinearLayout>
+</RelativeLayout>

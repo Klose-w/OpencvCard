@@ -72,10 +72,9 @@ public class Main2Activity extends AppCompatActivity implements NavigationView.O
         protected void onCreate (Bundle savedInstanceState){
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main2);
-
+            sp=getSharedPreferences("person",MODE_WORLD_READABLE);
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
-        circleImageView=(CircleImageView)findViewById(R.id.imageView);
-        getBitmapFromSharedPreferences();
+
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
@@ -92,6 +91,8 @@ public class Main2Activity extends AppCompatActivity implements NavigationView.O
 
             //we need the savedInstanceState to retrieve the position
             tabLayout.initialize(viewPager, getSupportFragmentManager(), fragmentList, savedInstanceState);
+           // circleImageView=(CircleImageView)findViewById(R.id.imageView);
+            //getBitmapFromSharedPreferences();
         }
 
 

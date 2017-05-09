@@ -16,10 +16,11 @@
         <menu>
             <item android:id="@+id/nav_share" android:icon="@android:drawable/ic_menu_share"
                 android:title="皮肤选择" />
-            <item android:id="@+id/nav_send" android:icon="@android:drawable/ic_menu_send"
-                android:title="头像设置" />
             <item android:id="@+id/face_send" android:icon="@android:drawable/ic_menu_send"
                 android:title="人脸上传" />
+            <item android:id="@+id/nav_send" android:icon="@android:drawable/ic_menu_send"
+                android:title="退出登录" />
+
         </menu>
     </item>
 

@@ -17,6 +17,7 @@ import android.util.Base64;
 import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.ab.util.AbStrUtil;
@@ -45,6 +46,7 @@ public class UserData extends AppCompatActivity {
     TextView Cnum;
     TextView Cqq;
     TextView Clike;
+    RelativeLayout relativeLayout;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -56,6 +58,7 @@ public class UserData extends AppCompatActivity {
         actionBar.setDisplayShowTitleEnabled(false);
         sp=getSharedPreferences("person", MODE_WORLD_READABLE);
         ed=sp.edit();
+        relativeLayout=(RelativeLayout)findViewById(R.id.login_layout);
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -78,12 +81,19 @@ public class UserData extends AppCompatActivity {
 
         //第一步:取出字符串形式的Bitmap
         String imageString=sp.getString("image", "");
-        //第二步:利用Base64将字符串转换为ByteArrayInputStream
-        byte[] byteArray= Base64.decode(imageString, Base64.DEFAULT);
-        ByteArrayInputStream byteArrayInputStream=new ByteArrayInputStream(byteArray);
-        //第三步:利用ByteArrayInputStream生成Bitmap
-        Bitmap bitmap= BitmapFactory.decodeStream(byteArrayInputStream);
-        circleImageView.setImageBitmap(bitmap);
+        if(!imageString.equals(""))
+        {
+            //第二步:利用Base64将字符串转换为ByteArrayInputStream
+            byte[] byteArray= Base64.decode(imageString, Base64.DEFAULT);
+            ByteArrayInputStream byteArrayInputStream=new ByteArrayInputStream(byteArray);
+            //第三步:利用ByteArrayInputStream生成Bitmap
+            Bitmap bitmap= BitmapFactory.decodeStream(byteArrayInputStream);
+            circleImageView.setImageBitmap(bitmap);
+        }else{
+            circleImageView.setImageResource(R.drawable.user_eye);
+        }
+
+       // relativeLayout.
     }
 
     private void saveBitmapToSharedPreferences(Bitmap bitmap){

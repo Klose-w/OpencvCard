@@ -70,9 +70,14 @@
             android:label="@string/title_activity_main2"
             android:theme="@style/AppTheme.NoActionBar" >
         </activity>
-        <activity android:name=".activity.ChangeUserDate" >
+        <activity
+            android:name=".activity.ChangeUserDate"
+            android:theme="@style/AppTheme" >
         </activity>
-        <activity android:name=".activity.CropImageActivity"/>
+        <activity android:name=".activity.CropImageActivity"
+            />
+        <activity android:name=".activity.PeopleFind" >
+        </activity>
     </application>
 
 </manifest>

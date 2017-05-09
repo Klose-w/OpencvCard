@@ -156,7 +156,7 @@ public class MainActivity extends AppCompatActivity {
         forgetpass = (Button) findViewById(R.id.login_error);
         sp=getSharedPreferences("person",MODE_WORLD_READABLE);
         ed=sp.edit();
-        saveBitmapToSharedPreferences();
+       // saveBitmapToSharedPreferences();
         if(sp.getString("plogin","").equals("是")) {
             Intent intent=new Intent(MainActivity.this, Main2Activity.class);
             startActivity(intent);

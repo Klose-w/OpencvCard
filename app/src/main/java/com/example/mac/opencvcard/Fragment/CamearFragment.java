@@ -2,6 +2,7 @@ package com.example.mac.opencvcard.Fragment;
 
 import android.app.Activity;
 import android.app.AlertDialog;
+import android.app.ProgressDialog;
 import android.content.ActivityNotFoundException;
 import android.content.Context;
 import android.content.DialogInterface;
@@ -54,6 +55,7 @@ import com.example.mac.opencvcard.activity.HTTPThread1;
 import com.example.mac.opencvcard.activity.HTTPThread2;
 import com.example.mac.opencvcard.activity.HttpThread;
 import com.example.mac.opencvcard.activity.Main2Activity;
+import com.example.mac.opencvcard.activity.PeopleFind;
 import com.example.mac.opencvcard.activity.ui.FaceOverlayView;
 import com.example.mac.opencvcard.activity.ui.FaceView;
 import com.example.mac.opencvcard.adapter.ImagePreviewAdapter;
@@ -92,6 +94,7 @@ public class CamearFragment extends Fragment implements SurfaceHolder.Callback, 
     private static final int PICK_IMAGE_REQUEST =11 ;
     private int numberOfCameras;
     Bitmap Faceload=null;
+    int num=0;
     public static final String TAG = "hh";
     boolean paizhao=false;
     private Camera mCamera;
@@ -109,11 +112,11 @@ public class CamearFragment extends Fragment implements SurfaceHolder.Callback, 
     private SurfaceView mView;
     private Bitmap faceCroped = null;
     // Draw rectangles and other fancy stuff:
-
+    ArrayList<FaceResult> faces_;
 
     // Log all errors:
     private final CameraErrorCallback mErrorCallback = new CameraErrorCallback();
-
+    Bitmap cropedFace;
     String FileName;
     private static final int MAX_FACE = 10;
     private boolean isThreadWorking = false;
@@ -137,7 +140,7 @@ public class CamearFragment extends Fragment implements SurfaceHolder.Callback, 
     private RecyclerView recyclerView;
     private ImagePreviewAdapter imagePreviewAdapter;
     private ArrayList<Bitmap> facesBitmap;
-    MKLoader perss;
+
     Button backCam,Buxc;
     View view;
     Button bt;
@@ -147,11 +150,30 @@ public class CamearFragment extends Fragment implements SurfaceHolder.Callback, 
     Bitmap bitmap;
     RequestQueue requestQueue;
     String Facetoken;
+    ProgressDialog progressDialog;
+    String nump;
+    RequestQueue mQueue;
     private Handler handler1 = new Handler(){
         @Override
         public void handleMessage(Message msg) {
             if(msg.what==0x456){
+                progressDialog.dismiss();
+                progressDialog.dismiss();
                 dialog();
+
+            }else if(msg.arg1==117){
+                if (cropedFace != null) {
+                    imagePreviewAdapter.add(cropedFace);
+                }
+                if(num!=0) {
+                    Toast.makeText(getActivity().getApplicationContext(), "共获得" + num + "张人脸,请选择你要识别的一张", Toast.LENGTH_LONG).show();
+                }else if(num==0){
+                    Toast.makeText(getActivity().getApplicationContext(), "图中没有人脸，你可以在相册中将图片放大，截图后尝试再次识别", Toast.LENGTH_LONG).show();
+                }
+                FaceView overlay = (FaceView)faceView.findViewById(R.id.faceView);
+                overlay.setContent(bitmap, faces_);
+                progressDialog.dismiss();
+
             }
         }
     };
@@ -160,7 +182,9 @@ public class CamearFragment extends Fragment implements SurfaceHolder.Callback, 
         public void handleMessage(Message msg) {
             if(msg.arg1==123){
                 if (bmp != null){
-                   detectFace(bmp);
+                    progressDialog.dismiss();
+                    detectFace(bmp);
+
                 }
                 else {
                     Toast.makeText(getActivity().getApplicationContext(), "Cann't open this image.", Toast.LENGTH_LONG).show();
@@ -190,7 +214,10 @@ public class CamearFragment extends Fragment implements SurfaceHolder.Callback, 
                     }.start();
                 }else{
                     Toast.makeText(getActivity().getApplicationContext(),"没有找到相关人员，你可以尝试重新拍摄",Toast.LENGTH_LONG).show();
+                    progressDialog.dismiss();
+                    progressDialog.dismiss();
                 }
+
             }
         }
     };
@@ -199,6 +226,7 @@ public class CamearFragment extends Fragment implements SurfaceHolder.Callback, 
     }
     public void dialog()
     {
+        mQueue = Volley.newRequestQueue(getActivity().getApplicationContext());
         ImageView view=new ImageView(getActivity());
         view.setImageBitmap(bitmap);
         AlertDialog.Builder dia=new AlertDialog.Builder(getActivity());
@@ -217,14 +245,14 @@ public class CamearFragment extends Fragment implements SurfaceHolder.Callback, 
                         Log.e("hhhh", jsonObject.toString());
                         try {
                             JSONObject jsonObject2 =new JSONObject(jsonObject.toString());
-                            String phonenum1;
-                            phonenum1=jsonObject2.getString("phonenum");
-
-
+                            nump=jsonObject2.getString("phonenum");
                         } catch (JSONException e) {
                             e.printStackTrace();
                         }
 
+                        Intent intent=new Intent(getActivity(), PeopleFind.class);
+                        intent.putExtra("numphone",nump);
+                        startActivity(intent);
                     }
                 },new Response.ErrorListener(){
 
@@ -235,7 +263,9 @@ public class CamearFragment extends Fragment implements SurfaceHolder.Callback, 
                 }){
 
                 };
-                requestQueue.add(jsonObjectRequest);
+                mQueue.add(jsonObjectRequest);
+
+
             }
         });
         dia.setNegativeButton("不是", new DialogInterface.OnClickListener() {
@@ -294,7 +324,6 @@ public class CamearFragment extends Fragment implements SurfaceHolder.Callback, 
             RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(getActivity().getApplicationContext());
             recyclerView.setLayoutManager(mLayoutManager);
             recyclerView.setItemAnimator(new DefaultItemAnimator());
-            perss=(MKLoader)view.findViewById(R.id.perss);
             Buxc=(Button)view.findViewById(R.id.backCamera);
             Buxc.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -315,8 +344,9 @@ public class CamearFragment extends Fragment implements SurfaceHolder.Callback, 
                 @Override
                 public void onClick(View v) {
                     paizhao = true;
-                    Toast.makeText(getActivity().getApplicationContext(),"正在识别，请稍后",Toast.LENGTH_LONG).show();
-                    perss.setVisibility(View.VISIBLE);
+                    progressDialog = ProgressDialog.show(getActivity(), "getting", "Please wait...", true, false);
+                    //Toast.makeText(getActivity().getApplicationContext(),"正在识别，请稍后",Toast.LENGTH_LONG).show();
+                    //perss.setVisibility(View.VISIBLE);
                 }
             });
 
@@ -343,8 +373,10 @@ public class CamearFragment extends Fragment implements SurfaceHolder.Callback, 
             Uri uri = data.getData();
 
             bitmap = ImageUtils.getBitmap(ImageUtils.getRealPathFromURI(getActivity(), uri), 2048, 1232);
-            if (bitmap != null)
+            if (bitmap != null){
                 detectFace(bitmap);
+            }
+
             else
                 Toast.makeText(getActivity().getApplicationContext(), "Cann't open this image.", Toast.LENGTH_LONG).show();
         }
@@ -352,7 +384,7 @@ public class CamearFragment extends Fragment implements SurfaceHolder.Callback, 
     public void getImage() {
         // Create intent to Open Image applications like Gallery, Google Photos
         try {
-            perss.setVisibility(View.VISIBLE);
+            //perss.setVisibility(View.VISIBLE);
             Intent galleryIntent = new Intent(Intent.ACTION_PICK,
                     MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
             // Start the Intent
@@ -558,10 +590,13 @@ public class CamearFragment extends Fragment implements SurfaceHolder.Callback, 
             start = System.currentTimeMillis();
 
         isThreadWorking = true;
-        waitForFdetThreadComplete();
-        detectThread = new FaceDetectThread(handler, getActivity());
-        detectThread.setData(_data);
-        detectThread.start();
+        if(paizhao==true) {
+            paizhao=false;
+            waitForFdetThreadComplete();
+            detectThread = new FaceDetectThread(handler, getActivity());
+            detectThread.setData(_data);
+            detectThread.start();
+        }
     }
 
     private void waitForFdetThreadComplete() {
@@ -654,12 +689,11 @@ public class CamearFragment extends Fragment implements SurfaceHolder.Callback, 
                     break;
             }
 
-            if(paizhao) {
-                Message message = new Message();
-                message.arg1 = 123;
-                handler.sendMessage(message);
-                paizhao=false;
-            }
+
+            Message message = new Message();
+            message.arg1 = 123;
+            handler.sendMessage(message);
+            paizhao=false;
             isThreadWorking = false;
 
         }
@@ -745,61 +779,66 @@ public class CamearFragment extends Fragment implements SurfaceHolder.Callback, 
         }
         return result;
     }
-    private void detectFace(Bitmap bitmap) {
+    private void detectFace(Bitmap bitmap1) {
         resetData();
-       // Log.e("kk", bitmap.getHeight() + "");
-        //Log.e("kk", bitmap.getWidth() + "");
-        android.media.FaceDetector fdet_ = new android.media.FaceDetector(bitmap.getWidth(), bitmap.getHeight(), MAX_FACE);
-        android.media.FaceDetector.Face[] fullResults = new android.media.FaceDetector.Face[MAX_FACE];
 
-        Log.e("kk",fdet_.findFaces(bitmap, fullResults)+"");
+        final Bitmap bitmap=bitmap1;
+        progressDialog = ProgressDialog.show(getActivity(), "Finding", "Please wait...", true, false);
+        new Thread(){
+            @Override
+            public void run() {
+                android.media.FaceDetector fdet_ = new android.media.FaceDetector(bitmap.getWidth(), bitmap.getHeight(), MAX_FACE);
+                android.media.FaceDetector.Face[] fullResults = new android.media.FaceDetector.Face[MAX_FACE];
 
-        ArrayList<FaceResult> faces_ = new ArrayList<>();
+                Log.e("kk",fdet_.findFaces(bitmap, fullResults)+"");
 
-        int num=0;
-        for (int i = 0; i < MAX_FACE; i++) {
-            if (fullResults[i] != null) {
-                PointF mid = new PointF();
-                fullResults[i].getMidPoint(mid);
+                faces_ = new ArrayList<>();
 
-                float eyesDis = fullResults[i].eyesDistance();
-                float confidence = fullResults[i].confidence();
-                float pose = fullResults[i].pose(android.media.FaceDetector.Face.EULER_Y);
 
-                Rect rect = new Rect(
-                        (int) (mid.x - eyesDis * 1.20f),
-                        (int) (mid.y - eyesDis * 0.55f),
-                        (int) (mid.x + eyesDis * 1.20f),
-                        (int) (mid.y + eyesDis * 1.85f));
+                for (int i = 0; i < MAX_FACE; i++) {
+                    if (fullResults[i] != null) {
+                        PointF mid = new PointF();
+                        fullResults[i].getMidPoint(mid);
 
-                /**
-                 * Only detect face size > 100x100
-                 */
-                if (rect.height() * rect.width() > 100 * 100) {
-                    FaceResult faceResult = new FaceResult();
-                    faceResult.setFace(0, mid, eyesDis, confidence, pose, System.currentTimeMillis());
-                    faces_.add(faceResult);
-                    num++;
+                        float eyesDis = fullResults[i].eyesDistance();
+                        float confidence = fullResults[i].confidence();
+                        float pose = fullResults[i].pose(android.media.FaceDetector.Face.EULER_Y);
 
-                    //
-                    // Crop Face to display in RecylerView
-                    //
-                    Bitmap cropedFace = ImageUtils.cropFace(faceResult, bitmap, 0);
-                    if (cropedFace != null) {
-                        imagePreviewAdapter.add(cropedFace);
+                        Rect rect = new Rect(
+                                (int) (mid.x - eyesDis * 1.20f),
+                                (int) (mid.y - eyesDis * 0.55f),
+                                (int) (mid.x + eyesDis * 1.20f),
+                                (int) (mid.y + eyesDis * 1.85f));
+
+                        /**
+                         * Only detect face size > 100x100
+                         */
+                        //num=0;
+                        if (rect.height() * rect.width() > 100 * 100) {
+                            FaceResult faceResult = new FaceResult();
+                            faceResult.setFace(0, mid, eyesDis, confidence, pose, System.currentTimeMillis());
+                            faces_.add(faceResult);
+                            num++;
+
+                            //
+                            // Crop Face to display in RecylerView
+                            //
+                            cropedFace = ImageUtils.cropFace(faceResult, bitmap, 0);
+
+                        }
                     }
                 }
+                Message message = new Message();
+                message.arg1 =117;
+                handler1.sendMessage(message);
             }
-        }
-        if(num!=0) {
-            Toast.makeText(getActivity().getApplicationContext(), "共获得" + num + "张人脸,请选择你要识别的一张", Toast.LENGTH_LONG).show();
-        }else
-        {
-            Toast.makeText(getActivity().getApplicationContext(), "图中没有人脸，你可以在相册中将图片放大，截图后尝试再次识别", Toast.LENGTH_LONG).show();
-        }
-        FaceView overlay = (FaceView)faceView.findViewById(R.id.faceView);
-        overlay.setContent(bitmap, faces_);
-        perss.setVisibility(View.INVISIBLE);
+        }.start();
+
+       // Log.e("kk", bitmap.getHeight() + "");
+        //Log.e("kk", bitmap.getWidth() + "");
+
+
+
     }
     public static String saveImage(Bitmap bmp) {
         File appDir = new File(Environment.getExternalStorageDirectory(), "ziliao");
@@ -849,10 +888,12 @@ public class CamearFragment extends Fragment implements SurfaceHolder.Callback, 
                 @Override
                 public void onClick(View v, int position) {
                     Faceload=imagePreviewAdapter.setCheck(position);
-                    Toast.makeText(getActivity().getApplicationContext(), "你点击了第" + position + "张人脸,已经上传", Toast.LENGTH_LONG).show();
+
+                    //Toast.makeText(getActivity().getApplicationContext(), "你点击了第" + position+1 + "张人脸,", Toast.LENGTH_LONG).show();
                     FileName=saveImage(Faceload);
 
                     imagePreviewAdapter.notifyDataSetChanged();
+                    progressDialog = ProgressDialog.show(getActivity(), "你点击了第" + position+1 + "张人脸,", "Please wait...", true, false);
                     new HTTPThread2(Environment.getExternalStorageDirectory()+"/ziliao/"+FileName,handler).start();
                 }
             });
