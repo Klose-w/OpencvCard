@@ -2,6 +2,7 @@ package com.example.mac.opencvcard.activity;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Color;
 import android.graphics.Matrix;
@@ -17,6 +18,7 @@ import android.text.SpannableStringBuilder;
 import android.text.style.ForegroundColorSpan;
 import android.text.style.ImageSpan;
 import android.text.style.RelativeSizeSpan;
+import android.util.Base64;
 import android.util.DisplayMetrics;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
@@ -44,9 +46,11 @@ import com.example.mac.opencvcard.Fragment.StudentRecommend;
 import com.example.mac.opencvcard.Fragment.Studenttalk;
 import com.example.mac.opencvcard.MainActivity;
 import com.example.mac.opencvcard.R;
+import com.example.mac.opencvcard.activity.ui.CircleImageView;
 import com.example.mac.opencvcard.adapter.MyFragmentAdapter;
 import com.example.mac.opencvcard.model.spacetablayout.SpaceTabLayout;
 
+import java.io.ByteArrayInputStream;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -62,6 +66,7 @@ public class Main2Activity extends AppCompatActivity implements NavigationView.O
         public static final int PAGE_TWO = 1;
         public static final int PAGE_THREE = 2;
         public static final int PAGE_FOUR = 3;
+        CircleImageView circleImageView;
         SpaceTabLayout tabLayout;
         @Override
         protected void onCreate (Bundle savedInstanceState){
@@ -69,7 +74,8 @@ public class Main2Activity extends AppCompatActivity implements NavigationView.O
         setContentView(R.layout.activity_main2);
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
-
+        circleImageView=(CircleImageView)findViewById(R.id.imageView);
+        getBitmapFromSharedPreferences();
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
@@ -95,7 +101,17 @@ public class Main2Activity extends AppCompatActivity implements NavigationView.O
         tabLayout.saveState(outState);
         super.onSaveInstanceState(outState);
     }
+    private void getBitmapFromSharedPreferences(){
 
+        //第一步:取出字符串形式的Bitmap
+        String imageString=sp.getString("image", "");
+        //第二步:利用Base64将字符串转换为ByteArrayInputStream
+        byte[] byteArray= Base64.decode(imageString, Base64.DEFAULT);
+        ByteArrayInputStream byteArrayInputStream=new ByteArrayInputStream(byteArray);
+        //第三步:利用ByteArrayInputStream生成Bitmap
+        Bitmap bitmap= BitmapFactory.decodeStream(byteArrayInputStream);
+        circleImageView.setImageBitmap(bitmap);
+    }
     //閲嶅啓ViewPager椤甸潰鍒囨崲鐨勫鐞嗘柟娉?
 
     @Override

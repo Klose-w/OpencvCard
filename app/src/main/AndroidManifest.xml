@@ -72,6 +72,7 @@
         </activity>
         <activity android:name=".activity.ChangeUserDate" >
         </activity>
+        <activity android:name=".activity.CropImageActivity"/>
     </application>
 
 </manifest>

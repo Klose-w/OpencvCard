@@ -42,6 +42,12 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.Toast;
 
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.JsonObjectRequest;
+import com.android.volley.toolbox.Volley;
 import com.example.mac.opencvcard.MainActivity;
 import com.example.mac.opencvcard.R;
 import com.example.mac.opencvcard.activity.HTTPThread1;
@@ -56,6 +62,9 @@ import com.example.mac.opencvcard.utils.CameraErrorCallback;
 import com.example.mac.opencvcard.utils.ImageUtils;
 import com.example.mac.opencvcard.utils.Util;
 import com.tuyenmonkey.mkloader.MKLoader;
+
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
@@ -75,6 +84,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.UUID;
 
 
@@ -135,6 +145,8 @@ public class CamearFragment extends Fragment implements SurfaceHolder.Callback, 
     String numshu;
     SurfaceHolder holder;
     Bitmap bitmap;
+    RequestQueue requestQueue;
+    String Facetoken;
     private Handler handler1 = new Handler(){
         @Override
         public void handleMessage(Message msg) {
@@ -157,7 +169,7 @@ public class CamearFragment extends Fragment implements SurfaceHolder.Callback, 
                 super.handleMessage(msg);
                 Bundle bundle = msg.getData();
                 numshu =(String) bundle.get("numshu");
-                final String Facetoken =(String) bundle.get("facetoken");
+                 Facetoken =(String) bundle.get("facetoken");
                // Log.e("pipei",Facetoken);
                 if(Facetoken!=null) {
                     new Thread(){
@@ -196,7 +208,34 @@ public class CamearFragment extends Fragment implements SurfaceHolder.Callback, 
         dia.setPositiveButton("是他", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
+                Map<String, String> map = new HashMap<String, String>();
+                map.put("facetoken", Facetoken);
+                JSONObject jsonObject=new JSONObject(map);
+                JsonObjectRequest jsonObjectRequest=new JsonObjectRequest(Request.Method.POST,"http://115.159.188.113/CaoCao/findface.php",jsonObject,new Response.Listener<JSONObject>(){
+                    @Override
+                    public void onResponse(JSONObject jsonObject) {
+                        Log.e("hhhh", jsonObject.toString());
+                        try {
+                            JSONObject jsonObject2 =new JSONObject(jsonObject.toString());
+                            String phonenum1;
+                            phonenum1=jsonObject2.getString("phonenum");
 
+
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+
+                    }
+                },new Response.ErrorListener(){
+
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        Log.e("TAG", error.getMessage(), error);
+                    }
+                }){
+
+                };
+                requestQueue.add(jsonObjectRequest);
             }
         });
         dia.setNegativeButton("不是", new DialogInterface.OnClickListener() {
@@ -251,6 +290,7 @@ public class CamearFragment extends Fragment implements SurfaceHolder.Callback, 
             mView = (SurfaceView) view.findViewById(R.id.surfaceview1);
             faceView = (FaceView) view.findViewById(R.id.faceView);
             recyclerView = (RecyclerView) view.findViewById(R.id.recycler_view);
+            requestQueue= Volley.newRequestQueue(getActivity().getApplicationContext());
             RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(getActivity().getApplicationContext());
             recyclerView.setLayoutManager(mLayoutManager);
             recyclerView.setItemAnimator(new DefaultItemAnimator());

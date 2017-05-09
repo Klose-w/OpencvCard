@@ -3,6 +3,8 @@ package com.example.mac.opencvcard;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.graphics.Color;
 import android.os.Bundle;
 
@@ -12,6 +14,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.text.Editable;
 import android.text.InputType;
 import android.text.TextWatcher;
+import android.util.Base64;
 import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
@@ -37,6 +40,7 @@ import com.google.gson.JsonObject;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.io.ByteArrayOutputStream;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -125,6 +129,18 @@ public class MainActivity extends AppCompatActivity {
             }
         }
     };
+    private void saveBitmapToSharedPreferences(){
+        Bitmap bitmap= BitmapFactory.decodeResource(getResources(), R.drawable.penple2);
+        //第一步:将Bitmap压缩至字节数组输出流ByteArrayOutputStream
+        ByteArrayOutputStream byteArrayOutputStream=new ByteArrayOutputStream();
+        bitmap.compress(Bitmap.CompressFormat.PNG, 80, byteArrayOutputStream);
+        //第二步:利用Base64将字节数组输出流中的数据转换成字符串String
+        byte[] byteArray=byteArrayOutputStream.toByteArray();
+        String imageString=new String(Base64.encodeToString(byteArray, Base64.DEFAULT));
+        //第三步:将String保持至SharedPreferences
+        ed.putString("image", imageString);
+        ed.commit();
+    }
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -140,6 +156,7 @@ public class MainActivity extends AppCompatActivity {
         forgetpass = (Button) findViewById(R.id.login_error);
         sp=getSharedPreferences("person",MODE_WORLD_READABLE);
         ed=sp.edit();
+        saveBitmapToSharedPreferences();
         if(sp.getString("plogin","").equals("是")) {
             Intent intent=new Intent(MainActivity.this, Main2Activity.class);
             startActivity(intent);

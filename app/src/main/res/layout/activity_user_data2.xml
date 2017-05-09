@@ -29,11 +29,11 @@
                     android:layout_width="100dp"
                     android:layout_height="100dp"
                     android:layout_marginTop="70dp"
-                    android:src="@drawable/penple2"
                     app:border_color="@android:color/white"
                     app:border_width="2dp"
                     android:layout_alignParentTop="true"
-                    android:layout_centerHorizontal="true" />
+                    android:layout_centerHorizontal="true"
+                   />
                 <TextView
                     android:id="@+id/nick_name"
                     android:layout_width="match_parent"

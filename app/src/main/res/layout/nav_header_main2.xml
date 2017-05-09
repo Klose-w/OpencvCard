@@ -14,7 +14,7 @@
         android:layout_height="60dp"
         android:layout_marginLeft="15dp"
         android:paddingTop="@dimen/nav_header_vertical_spacing"
-        android:src="@drawable/penple2" android:id="@+id/imageView" />
+        android:id="@+id/imageView" />
 
     <TextView android:layout_width="match_parent" android:layout_height="wrap_content"
         android:paddingTop="@dimen/nav_header_vertical_spacing" android:text="Android Studio"
