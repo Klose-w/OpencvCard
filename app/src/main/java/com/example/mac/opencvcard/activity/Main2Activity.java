@@ -82,9 +82,9 @@ public class Main2Activity extends AppCompatActivity implements NavigationView.O
             List<Fragment> fragmentList = new ArrayList<>();
             fragmentList.add(new FaceTopTen());
             fragmentList.add(new StudentRecommend());
-            fragmentList.add(new CamearFragment());
+            fragmentList.add(new Studenttalk());
             fragmentList.add(new  Studenttalk());
-            fragmentList.add(new FaceTopTen());
+            fragmentList.add(new CamearFragment());
 
             ViewPager viewPager = (ViewPager) findViewById(R.id.viewPager);
             tabLayout = (SpaceTabLayout) findViewById(R.id.spaceTabLayout);

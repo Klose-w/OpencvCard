@@ -141,9 +141,9 @@ public class CamearFragment extends Fragment implements SurfaceHolder.Callback, 
     private ImagePreviewAdapter imagePreviewAdapter;
     private ArrayList<Bitmap> facesBitmap;
 
-    Button backCam,Buxc;
+    ImageView backCam,Buxc;
     View view;
-    Button bt;
+    ImageView bt;
     ImageView Imagepz;
     String numshu;
     SurfaceHolder holder;
@@ -324,14 +324,14 @@ public class CamearFragment extends Fragment implements SurfaceHolder.Callback, 
             RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(getActivity().getApplicationContext());
             recyclerView.setLayoutManager(mLayoutManager);
             recyclerView.setItemAnimator(new DefaultItemAnimator());
-            Buxc=(Button)view.findViewById(R.id.backCamera);
+            Buxc=(ImageView)view.findViewById(R.id.backCamera);
             Buxc.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
                     getImage();
                 }
             });
-            backCam=(Button)view.findViewById(R.id.buttonxc);
+            backCam=(ImageView)view.findViewById(R.id.buttonxc);
             backCam.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
@@ -339,7 +339,7 @@ public class CamearFragment extends Fragment implements SurfaceHolder.Callback, 
                     getActivity().recreate();
                 }
             });
-            bt = (Button) view.findViewById(R.id.camerapz);
+            bt = (ImageView) view.findViewById(R.id.camerapz);
             bt.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {

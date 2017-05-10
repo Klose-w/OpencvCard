@@ -130,7 +130,7 @@ public class MainActivity extends AppCompatActivity {
         }
     };
     private void saveBitmapToSharedPreferences(){
-        Bitmap bitmap= BitmapFactory.decodeResource(getResources(), R.drawable.penple2);
+        Bitmap bitmap= BitmapFactory.decodeResource(getResources(), R.drawable.apptb);
         //第一步:将Bitmap压缩至字节数组输出流ByteArrayOutputStream
         ByteArrayOutputStream byteArrayOutputStream=new ByteArrayOutputStream();
         bitmap.compress(Bitmap.CompressFormat.PNG, 80, byteArrayOutputStream);

@@ -150,7 +150,7 @@ public class SpaceTabLayout extends RelativeLayout {
         defaultTabTwoButtonIcon = context.getResources().getDrawable(R.drawable.ic_tab_two);
         defaultTabThreeButtonIcon = context.getResources().getDrawable(R.drawable.ic_tab_three);
         defaultTabFourButtonIcon = context.getResources().getDrawable(R.drawable.ic_tab_four);
-        defaultTabFiveButtonIcon = context.getResources().getDrawable(R.drawable.ic_tab_five);
+        defaultTabFiveButtonIcon = context.getResources().getDrawable(R.drawable.xjtb);
 
         defaultTextColor = ContextCompat.getColor(context, android.R.color.primary_text_dark);
 

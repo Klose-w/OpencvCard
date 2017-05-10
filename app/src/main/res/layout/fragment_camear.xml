@@ -28,27 +28,37 @@
         android:scrollbars="vertical"
         />
 
-    <Button
+    <ImageView
         android:layout_width="50dp"
         android:layout_height="50dp"
-        android:layout_alignParentBottom="true"
+        android:src="@drawable/pztb"
+        android:id="@+id/camerapz"
+        android:layout_alignBottom="@+id/recycler_view"
         android:layout_centerHorizontal="true"
-        android:id="@+id/camerapz"/>
-
-<Button
-    android:layout_width="50dp"
+        android:layout_marginBottom="10dp" />
+<LinearLayout
+    android:layout_width="wrap_content"
     android:layout_height="wrap_content"
-    android:text="反转"
-    android:layout_alignTop="@+id/buttonxc"
-    android:layout_toStartOf="@+id/buttonxc"
-    android:id="@+id/backCamera"/>
-    <Button
-        android:layout_width="50dp"
-        android:layout_height="wrap_content"
-        android:text="相册"
+    android:layout_marginLeft="30dp"
+    android:layout_marginTop="20dp"
+    android:gravity="top|left">
+    <ImageView
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:layout_alignTop="@+id/buttonxc"
+        android:layout_toStartOf="@+id/buttonxc"
+        android:src="@drawable/xctb"
+        android:id="@+id/backCamera"/>
+    <ImageView
+        android:layout_marginLeft="20dp"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:src="@drawable/xztb"
         android:layout_alignTop="@+id/recycler_view"
         android:layout_toStartOf="@+id/camerapz"
         android:id="@+id/buttonxc"
-       />
+        />
+</LinearLayout>
+
 
 </RelativeLayout>

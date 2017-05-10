@@ -37,11 +37,11 @@
     <uses-permission android:name="android.permission.READ_PHONE_STATE" />
 
     <application
-        android:icon="@drawable/icon"
+        android:icon="@drawable/apptb"
         android:theme="@style/AppTheme" >
         <activity
             android:name=".MainActivity"
-            android:label="登陆"
+            android:label="知了"
             android:launchMode="singleTask" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
